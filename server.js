@@ -22,7 +22,7 @@ rollbar.log('Hello world!')
 // Endpoints for connecting to HTML, CSS and frontend JS files
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
-    
+
     try {
         doesNotExistFunc()
     } catch {
@@ -31,7 +31,11 @@ app.get('/', (req, res) => {
 })
 
 app.get('/styles', (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.css"))
+    try {
+        res.sendFile(path.join(__dirname, "./public/index.css"))
+    } catch {
+        rollbar.info("Your CSS file was successfully added")
+    }
 })
 
 app.get('/js', (req, res) => {
