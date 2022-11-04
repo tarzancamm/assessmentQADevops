@@ -22,6 +22,12 @@ rollbar.log('Hello world!')
 // Endpoints for connecting to HTML, CSS and frontend JS files
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, "./public/index.html"))
+    
+    try {
+        doesNotExistFunc()
+    } catch {
+        rollbar.warning("Hey, this function does not exist")
+    }
 })
 
 app.get('/styles', (req, res) => {
@@ -41,12 +47,6 @@ app.get('/api/robots', (req, res) => {
     } catch (error) {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
-    }
-
-    try {
-        doesNotExistFunc()
-    } catch {
-        rollbar.warning("Hey, this function does not exist")
     }
 })
 
