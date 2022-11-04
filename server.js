@@ -50,9 +50,6 @@ app.get('/js', (req, res) => {
 
 // Endpoints
 app.get('/api/robots', (req, res) => {
-
-    rollbar.info("Your robots are being retrieved")
-
     try {
         res.status(200).send(botsArr)
     } catch (error) {
@@ -74,6 +71,9 @@ app.get('/api/robots/five', (req, res) => {
 })
 
 app.post('/api/duel', (req, res) => {
+
+    rollbar.info("Robots are dueling")
+
     try {
         // getting the duos from the front end
         let {compDuo, playerDuo} = req.body
