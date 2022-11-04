@@ -34,7 +34,7 @@ app.get('/styles', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, "./public/index.css"))
     } catch {
-        rollbar.info("Your CSS file endpoint was unsuccessful")
+        rollbar.warning("Your CSS file endpoint was unsuccessful")
     }
 })
 
@@ -50,6 +50,9 @@ app.get('/js', (req, res) => {
 
 // Endpoints
 app.get('/api/robots', (req, res) => {
+
+    rollbar.info("Your robots are being retrieved")
+
     try {
         res.status(200).send(botsArr)
     } catch (error) {
