@@ -1,3 +1,4 @@
+// Imports
 const express = require('express')
 const path = require('path')
 const app = express()
@@ -6,6 +7,16 @@ const {shuffleArray} = require('./utils')
 
 // Middleware
 app.use(express.json())
+
+// Rollbar
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: process.env.ROLLBAR_TOKEN,
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 
 
 // Endpoints for connecting to HTML, CSS and frontend JS files
