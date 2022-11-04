@@ -34,12 +34,16 @@ app.get('/styles', (req, res) => {
     try {
         res.sendFile(path.join(__dirname, "./public/index.css"))
     } catch {
-        rollbar.info("Your CSS file was successfully added")
+        rollbar.info("Your CSS file endpoint was unsuccessful")
     }
 })
 
 app.get('/js', (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/index.js"))
+    try {
+        res.sendFile(path.join(__dirname, "./public/index.js"))
+    } catch {
+        rollbar.critical("Your index.js endpoint was unsuccessful")
+    }
 })
 
 
