@@ -42,6 +42,12 @@ app.get('/api/robots', (req, res) => {
         console.log('ERROR GETTING BOTS', error)
         res.sendStatus(400)
     }
+
+    try {
+        doesNotExistFunc()
+    } catch {
+        rollbar.warning("Hey, this function does not exist")
+    }
 })
 
 app.get('/api/robots/five', (req, res) => {
